@@ -15,11 +15,9 @@ FROM	alpine:latest
 WORKDIR	/project
 
 RUN		apk update && apk add	nginx \
-												# mariadb-server \
-												# php7.3-fpm \
-												# php7.3-mysql \
-												# wordpress \
-													openssl 
+								openssl \
+								openssh \
+								supervisor
 
 # ADD		https://files.phpmyadmin.net/phpMyAdmin/5.0.2/phpMyAdmin-5.0.2-all-languages.tar.gz phpmyadmin.tar.gz
 # RUN		tar xzf phpmyadmin.tar.gz && mv phpMyAdmin-5.0.2-all-languages /var/www/html/phpmyadmin
@@ -36,14 +34,17 @@ RUN		chown -R www:www /www
 RUN		mv /etc/nginx/nginx.conf /etc/nginx/nginx.conf.orig
 COPY	./srcs/nginx.conf /etc/nginx/nginx.conf
 COPY	./srcs/index.html /www/index.html
+COPY	./srcs/supervisord.conf /etc/supervisord.conf
 # COPY	./srcs/default /etc/nginx/nginx.conf
-# COPY	./srcs/start_services.sh ./srcs/db_init.sql /project/
+COPY	./srcs/start_services.sh /project/start_services.sh
 # COPY	./srcs/autoindex.sh /project/
 
 # RUN		mv /usr/share/wordpress /var/www/html
 
 # COPY	./srcs/wp-config.php /var/www/html/wordpress
 # COPY	./srcs/config.inc.php /var/www/html/phpmyadmin
+RUN ssh-keygen -A
+RUN adduser -D fermelin ; echo "fermelin:qwerty" | chpasswd
 
 # RUN		rm /var/www/html/index*
 
@@ -56,8 +57,8 @@ RUN		openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
 # RUN 	service mysql start && mysql < db_init.sql
 RUN		mkdir -p /run/nginx
 
-EXPOSE 	80 443
+EXPOSE 22 80 443
 
 # ENTRYPOINT ["bash", "start_services.sh"]
 # ENTRYPOINT	nginx
-ENTRYPOINT	nginx -g 'daemon off;'
+ENTRYPOINT	["/bin/sh", "/project/start_services.sh"]
