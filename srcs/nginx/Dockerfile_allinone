@@ -18,23 +18,31 @@ RUN		apk update && apk add	nginx \
 								openssl \
 								openssh \
 								supervisor \
-								mandoc man-pages vim 
+								php7 php7-fpm php7-opcache \
+								php7-gd php7-mysqli php7-zlib php7-curl \
+								mysql mysql-client
+								#mariadb-server php7.3-fpm php7.3-mysql wordpress mandoc man-pages vim 
 
-# ADD		https://files.phpmyadmin.net/phpMyAdmin/5.0.2/phpMyAdmin-5.0.2-all-languages.tar.gz phpmyadmin.tar.gz
-# RUN		tar xzf phpmyadmin.tar.gz && mv phpMyAdmin-5.0.2-all-languages /var/www/html/phpmyadmin
-# RUN		rm phpmyadmin.tar.gz
-
-# create dir for nginx
-# RUN		mkdir /var/www/localhost/ 
 RUN		adduser -D -g 'www' www
 
 RUN		mkdir /www
+
 RUN		chown -R www:www /var/lib/nginx
 RUN		chown -R www:www /www
+RUN		mkdir /www/html
+
+
+ADD		https://files.phpmyadmin.net/phpMyAdmin/5.0.2/phpMyAdmin-5.0.2-all-languages.tar.gz phpmyadmin.tar.gz
+RUN		tar xzf phpmyadmin.tar.gz && mv phpMyAdmin-5.0.2-all-languages /www/html/phpmyadmin
+RUN		rm phpmyadmin.tar.gz
+
+# create dir for nginx
+# RUN		mkdir /var/www/localhost/ 
 
 RUN		mv /etc/nginx/nginx.conf /etc/nginx/nginx.conf.orig
 COPY	./nginx.conf /etc/nginx/nginx.conf
-COPY	./index.html /www/index.html
+# COPY	./default /etc/nginx/nginx.conf
+COPY	./index.html /www/html/index.html	
 COPY	./supervisord.conf /etc/supervisord.conf
 # COPY	./srcs/default /etc/nginx/nginx.conf
 COPY	./start_services.sh /project/start_services.sh
@@ -42,8 +50,8 @@ COPY	./start_services.sh /project/start_services.sh
 
 # RUN		mv /usr/share/wordpress /var/www/html
 
-# COPY	./srcs/wp-config.php /var/www/html/wordpress
-# COPY	./srcs/config.inc.php /var/www/html/phpmyadmin
+# COPY	./wp-config.php /www/html/wordpress
+COPY	./config.inc.php /www/html/phpmyadmin
 
 
 RUN ssh-keygen -A
