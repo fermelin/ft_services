@@ -18,7 +18,10 @@ RUN		apk update && apk add	nginx \
 								openssl \
 								openssh \
 								supervisor \
-								mandoc man-pages vim 
+								mandoc man-pages vim \
+								mariadb \
+								mariadb-client \
+								mariadb-common
 
 # ADD		https://files.phpmyadmin.net/phpMyAdmin/5.0.2/phpMyAdmin-5.0.2-all-languages.tar.gz phpmyadmin.tar.gz
 # RUN		tar xzf phpmyadmin.tar.gz && mv phpMyAdmin-5.0.2-all-languages /var/www/html/phpmyadmin
@@ -30,16 +33,17 @@ RUN		adduser -D -g 'www' www
 
 RUN		mkdir /www
 RUN		chown -R www:www /var/lib/nginx
-RUN		chown -R www:www /www
 
 RUN		mv /etc/nginx/nginx.conf /etc/nginx/nginx.conf.orig
 COPY	./nginx.conf /etc/nginx/nginx.conf
 COPY	./index.html /www/index.html
 COPY	./supervisord.conf /etc/supervisord.conf
-# COPY	./srcs/default /etc/nginx/nginx.conf
 COPY	./start_services.sh /project/start_services.sh
+COPY	./wrapper_script.sh /project/wrapper_script.sh
+# COPY	./srcs/default /etc/nginx/nginx.conf
 # COPY	./srcs/autoindex.sh /project/
 
+RUN		chown -R www:www /www
 # RUN		mv /usr/share/wordpress /var/www/html
 
 # COPY	./srcs/wp-config.php /var/www/html/wordpress
@@ -70,4 +74,5 @@ EXPOSE 22 80 443
 
 # ENTRYPOINT ["bash", "start_services.sh"]
 # ENTRYPOINT	nginx
-ENTRYPOINT	["/bin/sh", "/project/start_services.sh"]
+# ENTRYPOINT	["/bin/sh", "/project/start_services.sh"]
+ENTRYPOINT	["/bin/sh", "/project/wrapper_script.sh"]

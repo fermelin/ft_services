@@ -1,11 +1,13 @@
 
-FROM alpine:latest
+FROM alpine:3.12
 
 WORKDIR	/project
 
-RUN		apk update && apk add 	nginx \
-								mariadb \
-								mariadb-client \
-								mariadb-common
+# RUN		apk update && apk add 	mysql \
+								# mandoc man-pages vim
 
-EXPOSE 5000
+COPY	./script.sh /project/script.sh
+
+EXPOSE 3306
+
+ENTRYPOINT ["/bin/sh", "/project/script.sh"]

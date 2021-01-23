@@ -7,33 +7,19 @@ spec:
     app: nginx
   type: LoadBalancer
   ports:
-    - protocol: TCP
-      name: http
+    - name: http
+      protocol: TCP
       port: 80
       targetPort: 80
-    - protocol: TCP
-      name: https
+    - name: https
+      protocol: TCP
       port: 443
       targetPort: 443
-    - protocol: TCP
-      name: ssh
+    - name: ssh
+      protocol: TCP
       port: 22
       targetPort: 22
 ---
-# apiVersion: v1
-# kind: Pod
-# metadata:
-#   name: nginx
-#   labels:
-#     app: nginx
-# spec:
-#   containers:
-#   - name: nginx
-#     image: nginx_image
-#     imagePullPolicy: Never
-#     ports:
-#       - containerPort: 80
-# # The pod template ends here
 apiVersion: apps/v1
 kind: Deployment
 metadata:
