@@ -17,11 +17,7 @@ WORKDIR	/project
 RUN		apk update && apk add	nginx \
 								openssl \
 								openssh \
-								supervisor \
 								mandoc man-pages vim \
-								mariadb \
-								mariadb-client \
-								mariadb-common
 
 # ADD		https://files.phpmyadmin.net/phpMyAdmin/5.0.2/phpMyAdmin-5.0.2-all-languages.tar.gz phpmyadmin.tar.gz
 # RUN		tar xzf phpmyadmin.tar.gz && mv phpMyAdmin-5.0.2-all-languages /var/www/html/phpmyadmin
@@ -49,15 +45,14 @@ RUN		chown -R www:www /www
 # COPY	./srcs/wp-config.php /var/www/html/wordpress
 # COPY	./srcs/config.inc.php /var/www/html/phpmyadmin
 
-
 RUN ssh-keygen -A
 
 # RUN sed -i 's/#PermitEmptyPasswords no/PermitEmptyPasswords yes/' /etc/ssh/sshd_config
 RUN sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config
 
-RUN echo "root:rootpassword" | chpasswd
+RUN echo "root:password" | chpasswd
 
-RUN adduser -D fermelin ; echo "fermelin:qwerty" | chpasswd
+RUN adduser -D fermelin ; echo "fermelin:password" | chpasswd
 
 # RUN		rm /var/www/html/index*
 
