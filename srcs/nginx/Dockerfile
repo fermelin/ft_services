@@ -17,8 +17,7 @@ WORKDIR	/project
 RUN		apk update && apk add	nginx \
 								openssl \
 								openssh \
-								mandoc man-pages vim \
-
+								mandoc man-pages vim
 # ADD		https://files.phpmyadmin.net/phpMyAdmin/5.0.2/phpMyAdmin-5.0.2-all-languages.tar.gz phpmyadmin.tar.gz
 # RUN		tar xzf phpmyadmin.tar.gz && mv phpMyAdmin-5.0.2-all-languages /var/www/html/phpmyadmin
 # RUN		rm phpmyadmin.tar.gz
@@ -33,8 +32,8 @@ RUN		chown -R www:www /var/lib/nginx
 RUN		mv /etc/nginx/nginx.conf /etc/nginx/nginx.conf.orig
 COPY	./nginx.conf /etc/nginx/nginx.conf
 COPY	./index.html /www/index.html
-COPY	./supervisord.conf /etc/supervisord.conf
-COPY	./start_services.sh /project/start_services.sh
+# COPY	./supervisord.conf /etc/supervisord.conf
+# COPY	./start_services.sh /project/start_services.sh
 COPY	./wrapper_script.sh /project/wrapper_script.sh
 # COPY	./srcs/default /etc/nginx/nginx.conf
 # COPY	./srcs/autoindex.sh /project/
