@@ -5,7 +5,7 @@ metadata:
 spec:
   selector:
     app: mysql
-  type: LoadBalancer
+  type: ClusterIP
   ports:
     - name: mysql
       protocol: TCP
@@ -34,3 +34,10 @@ spec:
         imagePullPolicy: Never
         ports:
         - containerPort: 3306
+        volumeMounts:
+          - mountPath: "/var/lib/mysql"
+            name: mysql-data
+      volumes:
+      - name: mysql-data
+        persistentVolumeClaim:
+          claimName: mysql-data-disk

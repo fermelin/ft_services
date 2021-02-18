@@ -1,0 +1,28 @@
+# Give access to stats endpoints
+kind: ClusterRole
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: metrics:reader
+  labels:
+    rbac.authorization.k8s.io/aggregate-to-view: "true"
+    rbac.authorization.k8s.io/aggregate-metrics-read: "true"
+rules:
+  - apiGroups: ["metrics.k8s.io"]
+    resources: ["pods"]
+    verbs: ["get", "list", "watch"]
+  - apiGroups: [""]
+    resources: ["nodes/stats", "nodes/proxy"]
+    verbs: ["get", "watch", "list"]
+---
+# Define global role with the default system:aggregate-to-view cluster role and the two rules we just created
+kind: ClusterRole
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: metrics
+aggregationRule:
+  clusterRoleSelectors:
+    - matchLabels:
+        rbac.authorization.k8s.io/aggregate-to-view: "true"
+    - matchLabels:
+        rbac.authorization.k8s.io/aggregate-metrics-read: "true"
+rules: [] # Rules are automatically filled in by the controller manager.

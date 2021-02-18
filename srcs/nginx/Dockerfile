@@ -30,19 +30,19 @@ RUN		mkdir /www
 RUN		chown -R www:www /var/lib/nginx
 
 RUN		mv /etc/nginx/nginx.conf /etc/nginx/nginx.conf.orig
-COPY	./nginx.conf /etc/nginx/nginx.conf
-COPY	./index.html /www/index.html
-# COPY	./supervisord.conf /etc/supervisord.conf
-# COPY	./start_services.sh /project/start_services.sh
-COPY	./wrapper_script.sh /project/wrapper_script.sh
-# COPY	./srcs/default /etc/nginx/nginx.conf
-# COPY	./srcs/autoindex.sh /project/
+COPY	./srcs/nginx.conf /etc/nginx/nginx.conf
+COPY	./srcs/index.html /www/index.html
+# COPY	./srcs/supervisord.conf /etc/supervisord.conf
+# COPY	./srcs/start_services.sh /project/start_services.sh
+COPY	./srcs/wrapper_script.sh /project/wrapper_script.sh
+# COPY	./srcs/srcs/default /etc/nginx/nginx.conf
+# COPY	./srcs/srcs/autoindex.sh /project/
 
 RUN		chown -R www:www /www
 # RUN		mv /usr/share/wordpress /var/www/html
 
-# COPY	./srcs/wp-config.php /var/www/html/wordpress
-# COPY	./srcs/config.inc.php /var/www/html/phpmyadmin
+# COPY	./srcs/srcs/wp-config.php /var/www/html/wordpress
+# COPY	./srcs/srcs/config.inc.php /var/www/html/phpmyadmin
 
 RUN ssh-keygen -A
 

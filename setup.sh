@@ -14,11 +14,19 @@
 # attempts=0
 # kubectl apply -f ./srcs/nginx/nginx.yaml
 
-minikube start --driver=virtualbox
+minikube ip > /dev/null
+if [ $? -ne 0 ]
+then
+	minikube start --driver=virtualbox
+fi
 minikube addons enable metallb
-eval $(minikube docker-env)
+minikube dashboard &
+eval $(minikube docker-env) && sleep 4
 
 kubectl apply -f ./srcs/configmap.yaml
 
 docker build -t nginx_image ./srcs/nginx
-kubectl apply -f ./srcs/nginx/nginx.yaml
+kubectl apply -f ./srcs/nginx/srcs/nginx.yaml
+
+docker build -t mysql_image ./srcs/mysql
+kubectl apply -f ./srcs/mysql/srcs/mysql.yaml

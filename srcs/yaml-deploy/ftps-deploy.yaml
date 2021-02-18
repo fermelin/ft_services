@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ftps
+spec:
+  selector:
+    matchLabels:
+      app: ftps
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: ftps
+    spec:
+      containers:
+      - name: ftps
+        image: ftps:latest
+        imagePullPolicy: Never
+        resources:
+          limits:
+            memory: 512Mi
+          requests:
+            memory: 128Mi
+        ports:
+        - containerPort: 21
+        - containerPort: 20021
+        volumeMounts:
+        - name: ftps-storage
+          mountPath: /var/lib/ftp
+      volumes:
+      - name: ftps-storage
+        persistentVolumeClaim:
+          claimName: ftps-pv-claim
