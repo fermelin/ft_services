@@ -14,9 +14,6 @@ COPY 	./srcs/nginx.conf /etc/nginx/conf.d/default.conf
 COPY 	./srcs/supervisord.conf /etc/supervisord.conf
 COPY	./srcs/wp-config.php /www/
 
-COPY	./srcs/textwp.1.0.1.zip /www/wordpress/wp-content/themes
-RUN		cd /www/wordpress/wp-content/themes/ && unzip textwp.1.0.1.zip 
-
 RUN		mkdir -p /run/nginx && chmod 744 /run/nginx
 
 EXPOSE	5050

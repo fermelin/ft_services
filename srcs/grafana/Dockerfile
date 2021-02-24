@@ -1,6 +1,6 @@
 FROM	alpine:3.12
 
-RUN     apk update && apk upgrade
+RUN     apk update && apk upgrade && apk add openrc
 
 RUN     apk add grafana --repository=http://dl-3.alpinelinux.org/alpine/edge/testing/
 
