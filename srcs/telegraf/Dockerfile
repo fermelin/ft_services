@@ -1,10 +1,10 @@
-FROM	alpine:3.12
+FROM	alpine:3.12.3
 
 ARG     MINIKUBE_IP
 
 RUN	apk update && apk upgrade
 
-RUN     apk add telegraf --repository=http://dl-3.alpinelinux.org/alpine/edge/testing/
+RUN     apk add telegraf --repository=http://dl-3.alpinelinux.org/alpine/edge/community/
 
 RUN     mkdir -p /etc/telegraf/
 

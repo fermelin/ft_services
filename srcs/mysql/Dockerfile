@@ -1,5 +1,5 @@
 
-FROM alpine:3.12
+FROM alpine:3.12.3
 
 WORKDIR	/project
 
