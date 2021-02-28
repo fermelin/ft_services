@@ -29,7 +29,7 @@ define( 'DB_USER', 'fermelin' );
 define( 'DB_PASSWORD', 'password' );
 
 /** MySQL hostname */
-define( 'DB_HOST', 'localhost' );
+define( 'DB_HOST', 'mysql:3306' );
 
 /** Database Charset to use in creating database tables. */
 define( 'DB_CHARSET', 'utf8' );
@@ -39,7 +39,6 @@ define( 'DB_COLLATE', '' );
 
 //edition needed
 
-define( 'DB_HOST', 'mysql:3306');
 define( 'WP_HOME', 'http://192.168.99.123:5050/' );
 define( 'WP_SITEURL', 'http://192.168.99.123:5050/' );
 define('FS_METHOD', 'direct');
@@ -54,14 +53,14 @@ define('FS_METHOD', 'direct');
  * @since 2.6.0
  */
 
-define('AUTH_KEY',         'wo}>sgXK+s;;O36)TTVNobkln|nP;,$[#`q=,Pv[<++l/6<;`rI7O#,LqH8tLhCr');
-define('SECURE_AUTH_KEY',  'ZLsyt@7;g!1gYhC9;0fU|Qm{Us|A`,>]Y)GOlO8EK<cu/D=?G~V5_(tr]quE7`U/');
-define('LOGGED_IN_KEY',    ']]gYCQQlP22ITP7lgyzb7PD0KBVU=izR[=08X45Tezyz%(T#:0G!l[q(hrr/bc!T');
-define('NONCE_KEY',        ']vjk|57E-mk7)JrW%UJ-3nwfSq`$rU%,^.y$7#6&yO+I[5K8i)EfRg0,kf],$ gy');
-define('AUTH_SALT',        'ie0y~P?`>_/`V?f_KoHf9+#B(g$1/X<e48(J(tfs(&2+<J~=AF#i4|1fZEf?;2Hz');
-define('SECURE_AUTH_SALT', '9mMp(bwdtXN|e26Up8zRiY;G;|?d2:ya2nKLp#nl*v{K+_8F 986l2!Pw9!S4lEK');
-define('LOGGED_IN_SALT',   'AZhwwlp_`UO5ms.?[(gmtH]6;3Xs>iHUn$OB^47tV1!9b+naL/$IzFD4eJIVV#-h');
-define('NONCE_SALT',       'LZ56LA^H<#U&e^ W41-g* L[TQRDUC~${?z_*sPo|!MVJVA,=jq/7(D^l88lla[k');
+define('AUTH_KEY',         'iZ|h_nr{*+R|m|DX0AfFGn_4hNeTS,{)TItN5E5H.ju=yrg,0);4+-s*wvE*lbsb');
+define('SECURE_AUTH_KEY',  'Q2s|!OwZ}~_0Rm<SQm8]F6E3FsX]#]o  5oeIQ|n*[hO/]}#M-y$>|7A&rK9UkdN');
+define('LOGGED_IN_KEY',    '?a/X5ib%]Vv;fIuZ#^m4V|cE-va3r`9-6QzH{Ba-}L5C&!(1[|:E-|_mL<q9!SG%');
+define('NONCE_KEY',        'S;b_?,&*%N@bv|A6J`h7)nq@?3n&bzoq:dP0N|l #.Tdes#1%|z;4k0;r{$G8+bc');
+define('AUTH_SALT',        'C-Z/m#Vzak^6MjXg79mZm[&$]dXhYMHK/YjONKp,?aF;4DcJ`G+DA5&0{FxS6g>G');
+define('SECURE_AUTH_SALT', 'iLQq~U&~_RxqNd?7QZ#R>]~qttG@4U@9Ff-WAXZ}xA=j5l4!IDm{,|rM2ncq%WnL');
+define('LOGGED_IN_SALT',   '#S6FN*!aIOC*-/w`f,P$*GxLS.<=iYB1hw*@3HXjCFAN@&(qb;7mBo]Wuf;oB[U>');
+define('NONCE_SALT',       'Be-_]JO+:|fXej,_HG|.fbvvm.E]Vb-+*6hqM.|IMB/}mZ+p)CGb{rr|<+3IRIwY');
 
 /**#@-*/
 
@@ -85,7 +84,7 @@ $table_prefix = 'wp_';
  *
  * @link https://wordpress.org/support/article/debugging-in-wordpress/
  */
-define( 'WP_DEBUG', false );
+define( 'WP_DEBUG', true );
 
 /* That's all, stop editing! Happy publishing. */
 

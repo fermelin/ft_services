@@ -1,4 +1,4 @@
 CREATE DATABASE wordpress;
-CREATE USER 'fermelin'@'localhost' IDENTIFIED BY 'password';
-GRANT ALL PRIVILEGES ON wordpress.* TO 'fermelin'@'localhost';
+CREATE USER 'fermelin'@'%' IDENTIFIED BY 'password';
+GRANT ALL PRIVILEGES ON wordpress.* TO 'fermelin'@'%' IDENTIFIED BY 'password' WITH GRANT OPTION;
 FLUSH PRIVILEGES;

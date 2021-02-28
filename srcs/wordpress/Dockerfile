@@ -4,7 +4,7 @@ RUN 	apk update && apk upgrade
 
 RUN		apk add openrc nginx supervisor php7 php7-fpm php7-mysqli php7-zlib \
 		php7-curl php7-mbstring php7-json php7-session
-		
+
 RUN		mkdir www
 
 RUN 	wget https://wordpress.org/latest.zip && unzip latest.zip && \

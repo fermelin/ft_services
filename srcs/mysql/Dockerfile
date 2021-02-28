@@ -8,6 +8,7 @@ RUN		apk update && apk add openrc mysql mysql-client && \
 
 COPY	./srcs/start_mysql.sh /project/start_mysql.sh
 COPY	./srcs/init_database.sql /project/init_database.sql
+COPY	./srcs/wordpress.sql /project/wordpress.sql
 COPY	./srcs/my.cnf /etc/my.cnf
 
 # RUN		mkdir -p /run/mysqld
