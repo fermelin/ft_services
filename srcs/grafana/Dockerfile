@@ -1,9 +1,6 @@
 FROM	alpine:3.12.3
 
-WORKDIR	/project
-
 RUN     apk update && apk upgrade \
-		&& apk add openrc \
 		&& apk add grafana --repository=http://dl-3.alpinelinux.org/alpine/edge/community/
 
 RUN     mkdir -p /var/lib/grafana_dashboards/

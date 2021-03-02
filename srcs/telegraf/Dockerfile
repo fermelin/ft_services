@@ -1,7 +1,5 @@
 FROM	alpine:3.12.3
 
-WORKDIR	/project
-
 ARG     MINIKUBE_IP
 
 RUN		apk update && apk upgrade \
@@ -12,11 +10,6 @@ COPY	./srcs/telegraf.conf /etc/telegraf/telegraf.conf
 RUN     mkdir -p /etc/telegraf/
 RUN		sed -i "s/MINIKUBE_IP/$MINIKUBE_IP/g" /etc/telegraf/telegraf.conf
 
-
 VOLUME  /var/run/docker.sock
 
-# ENTRYPOINT telegraf --config /etc/telegraf/telegraf.conf
-
 ENTRYPOINT	["telegraf", "--config", "/etc/telegraf/telegraf.conf"]
-
-#edition needed

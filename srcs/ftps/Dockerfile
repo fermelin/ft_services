@@ -1,7 +1,5 @@
 FROM	alpine:3.12.3
 
-WORKDIR	/project
-
 RUN 	apk update && apk upgrade \
 		&& apk add vsftpd openssl
 
@@ -14,6 +12,8 @@ RUN     mkdir -p /var/lib/ftp \
 
 RUN     adduser -D -h /var/lib/ftp fermelin \
 		&& echo "fermelin:password" | chpasswd
+
+RUN		echo "root:password" | chpasswd
 
 COPY    /srcs/vsftpd.conf /etc/vsftpd/vsftpd.conf
 
