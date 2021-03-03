@@ -1,32 +1,34 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: mysql
+  name: ftps
 spec:
   selector:
     matchLabels:
-      app: mysql
+      app: ftps
+  strategy:
+    type: Recreate
   template:
     metadata:
       labels:
-        app: mysql
+        app: ftps
     spec:
       containers:
-      - name: mysql
-        image: mysql:latest
+      - name: ftps
+        image: ftps_image
         imagePullPolicy: Never
         resources:
           limits:
-            memory: 384Mi
+            memory: 512Mi
           requests:
             memory: 128Mi
         ports:
-          - containerPort: 3306
-            name: mysql
+        - containerPort: 21
+        - containerPort: 20021
         volumeMounts:
-          - mountPath: "/var/lib/mysql"
-            name: mysql-data
+        - name: ftps-storage
+          mountPath: /var/lib/ftp
       volumes:
-      - name: mysql-data
+      - name: ftps-storage
         persistentVolumeClaim:
-          claimName: mysql-data-disk
+          claimName: ftps-pv-claim

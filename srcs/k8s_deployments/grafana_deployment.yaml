@@ -1,27 +1,26 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nginx
+  name: grafana
 spec:
-  replicas: 1
   selector:
     matchLabels:
-      app: nginx
+      app: grafana
+  strategy:
+    type: Recreate
   template:
     metadata:
       labels:
-        app: nginx
+        app: grafana
     spec:
       containers:
-      - image: nginx
-        name: nginx
+      - name: grafana
+        image: grafana_image
         imagePullPolicy: Never
         resources:
           limits:
-            memory: 192Mi
+            memory: 256Mi
           requests:
-            memory: 64Mi
+            memory: 128Mi
         ports:
-        - containerPort: 22
-        - containerPort: 80
-        - containerPort: 443
+        - containerPort: 3000
