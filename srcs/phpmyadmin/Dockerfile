@@ -20,5 +20,3 @@ RUN 	chown -R nginx:nginx /var/www/localhost/htdocs
 EXPOSE	5000
 
 ENTRYPOINT	["/bin/sh", "/project/wrapper_script.sh"]
-
-#edition needed

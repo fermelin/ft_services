@@ -14,7 +14,7 @@ spec:
       serviceAccountName: telegraf
       containers:
       - name: telegraf
-        image: telegraf:latest
+        image: telegraf_image
         imagePullPolicy: Never
         resources:
           limits:
